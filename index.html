@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alex Morgan | Frontend Developer</title>
+    <title>Goutham Saravanan | Frontend Developer</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -60,6 +60,35 @@
             color: var(--text-primary);
             transition: var(--transition);
             line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Grain Animation */
+        .grain-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.05;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            animation: grain 8s steps(10) infinite;
+        }
+
+        @keyframes grain {
+            0%, 100% { transform: translate(0, 0); }
+            10% { transform: translate(-5%, -10%); }
+            20% { transform: translate(-15%, 5%); }
+            30% { transform: translate(7%, -25%); }
+            40% { transform: translate(-5%, 25%); }
+            50% { transform: translate(-15%, 10%); }
+            60% { transform: translate(15%, 0%); }
+            70% { transform: translate(0%, 15%); }
+            80% { transform: translate(3%, -35%); }
+            90% { transform: translate(-10%, 10%); }
         }
 
         h1, h2, h3, h4 {
@@ -72,10 +101,13 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
+            position: relative;
+            z-index: 2;
         }
 
         section {
             padding: 100px 0;
+            position: relative;
         }
 
         .section-title {
@@ -318,7 +350,57 @@
             font-size: 1.4rem;
         }
 
+        /* Technologies Section */
+        .technologies {
+            background-color: var(--bg-primary);
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+            gap: 30px;
+            justify-items: center;
+        }
+
+        .tech-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+            width: 100%;
+        }
+
+        .tech-icon {
+            font-size: 3rem;
+            color: var(--text-primary);
+            transition: var(--transition);
+        }
+
+        .tech-name {
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-align: center;
+            color: var(--text-secondary);
+        }
+
+        .tech-item:hover {
+            background-color: var(--bg-secondary);
+            transform: translateY(-5px);
+        }
+
+        .tech-item:hover .tech-icon {
+            color: var(--accent);
+            transform: scale(1.2);
+        }
+
         /* Projects Section */
+        .projects {
+            background-color: var(--bg-secondary);
+        }
+
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -381,6 +463,10 @@
         }
 
         /* About Section */
+        .about {
+            background-color: var(--bg-primary);
+        }
+
         .about-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -612,17 +698,26 @@
             .project-img {
                 height: 180px;
             }
+            
+            .tech-grid {
+                grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+                gap: 15px;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Grain Animation Overlay -->
+    <div class="grain-overlay"></div>
+
     <!-- Header -->
     <header>
         <div class="container header-container">
-            <a href="#" class="logo">Alex<span>Dev</span></a>
+            <a href="#" class="logo">>.gs\<span>Dev</span></a>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#skills">Skills</a></li>
+                <li><a href="#tech">Tech</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
@@ -638,7 +733,7 @@
         <div class="container">
             <div class="hero-content">
                 <h1>Crafting <span>Digital Experiences</span> That Inspire</h1>
-                <p>I'm Alex Morgan, a passionate frontend developer specializing in creating modern, responsive web applications with clean code and intuitive user interfaces.</p>
+                <p>I'm Goutham Saravanan, a passionate frontend developer specializing in creating modern, responsive web applications with clean code and intuitive user interfaces.</p>
                 <div class="hero-buttons">
                     <a href="#projects" class="btn">
                         <i class="fas fa-code"></i> View Projects
@@ -701,6 +796,81 @@
                     </div>
                     <h3>Performance</h3>
                     <p>Optimizing load times, bundle optimization, lazy loading, and performance auditing.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technologies Section -->
+    <section id="tech" class="technologies">
+        <div class="container">
+            <div class="section-title">
+                <h2>Technologies</h2>
+            </div>
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <i class="fab fa-figma tech-icon"></i>
+                    <span class="tech-name">Figma</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-js tech-icon"></i>
+                    <span class="tech-name">JavaScript</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-python tech-icon"></i>
+                    <span class="tech-name">Python</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-react tech-icon"></i>
+                    <span class="tech-name">React</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-html5 tech-icon"></i>
+                    <span class="tech-name">HTML5</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-css3-alt tech-icon"></i>
+                    <span class="tech-name">CSS3</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-vuejs tech-icon"></i>
+                    <span class="tech-name">Vue.js</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-angular tech-icon"></i>
+                    <span class="tech-name">Angular</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-bootstrap tech-icon"></i>
+                    <span class="tech-name">Bootstrap</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-sass tech-icon"></i>
+                    <span class="tech-name">Sass</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-npm tech-icon"></i>
+                    <span class="tech-name">npm</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-node-js tech-icon"></i>
+                    <span class="tech-name">Node.js</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-git-alt tech-icon"></i>
+                    <span class="tech-name">Git</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-github tech-icon"></i>
+                    <span class="tech-name">GitHub</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-aws tech-icon"></i>
+                    <span class="tech-name">AWS</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-wordpress tech-icon"></i>
+                    <span class="tech-name">WordPress</span>
                 </div>
             </div>
         </div>
@@ -770,7 +940,7 @@
             <div class="about-content">
                 <div class="about-text">
                     <h2>Frontend Developer & UI Enthusiast</h2>
-                    <p>I specialize in creating responsive, accessible, and performant web applications. With a strong foundation in modern JavaScript and CSS, I build interfaces that users love.</p>
+                    <p>I'm Goutham Saravanan, specializing in creating responsive, accessible, and performant web applications. With a strong foundation in modern JavaScript and CSS, I build interfaces that users love.</p>
                     <p>My journey in web development began 5 years ago, and since then I've worked with startups and established companies to deliver exceptional digital products.</p>
                     <p>When I'm not coding, you can find me exploring new web technologies, contributing to open-source projects, or hiking in the mountains.</p>
                     <a href="#contact" class="btn">
@@ -794,18 +964,18 @@
             </div>
             <div class="contact-container">
                 <div class="contact-form">
-                    <form id="contactForm">
+                    <form id="contactForm" action="https://formspree.io/f/mqkrqjqg" method="POST">
                         <div class="form-group">
-                            <input type="text" placeholder="Your Name" required>
+                            <input type="text" name="name" placeholder="Your Name" required>
                         </div>
                         <div class="form-group">
-                            <input type="email" placeholder="Your Email" required>
+                            <input type="email" name="email" placeholder="Your Email" required>
                         </div>
                         <div class="form-group">
-                            <input type="text" placeholder="Subject">
+                            <input type="text" name="subject" placeholder="Subject">
                         </div>
                         <div class="form-group">
-                            <textarea placeholder="Your Message" required></textarea>
+                            <textarea name="message" placeholder="Your Message" required></textarea>
                         </div>
                         <button type="submit" class="btn">
                             <i class="fas fa-paper-plane"></i> Send Message
@@ -819,7 +989,7 @@
                         </div>
                         <div class="contact-details">
                             <h3>Location</h3>
-                            <p>San Francisco, California</p>
+                            <p>Boston, MA</p>
                         </div>
                     </div>
                     
@@ -829,7 +999,7 @@
                         </div>
                         <div class="contact-details">
                             <h3>Email</h3>
-                            <p>hello@alexdev.com</p>
+                            <p>goutham6.techie@gmail.com</p>
                             <div class="social-links">
                                 <a href="#"><i class="fab fa-linkedin-in"></i></a>
                                 <a href="#"><i class="fab fa-github"></i></a>
@@ -847,11 +1017,10 @@
     <footer>
         <div class="container">
             <div class="footer-container">
-                <div class="logo">Alex<span>Dev</span></div>
-                <p>© 2023 Alex Morgan. All rights reserved.</p>
+                <div class="logo">Goutham<span>Saravanan</span></div>
+                <p>© 2025 Goutham Saravanan</p>
             </div>
             <div class="copyright">
-                <p>Designed and built with ❤️</p>
             </div>
         </div>
     </footer>
@@ -865,7 +1034,8 @@
         const savedTheme = localStorage.getItem('theme');
         const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
         
-        if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+        // Set default to light mode
+        if (savedTheme === 'dark') {
             document.body.classList.add('dark-mode');
             themeIcon.classList.remove('fa-moon');
             themeIcon.classList.add('fa-sun');
@@ -911,6 +1081,9 @@
         if (contactForm) {
             contactForm.addEventListener('submit', function(e) {
                 e.preventDefault();
+                
+                // Formspree handles submission
+                this.submit();
                 alert('Thank you for your message! I will get back to you soon.');
                 this.reset();
             });
