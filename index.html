@@ -37,6 +37,42 @@
             --dark-particle-color: var(--dark-primary);
             
             --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+            /* Custom Cursor Styles */
+#cursor, #cursor-border {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none; /* Allows you to click "through" the cursor */
+    z-index: 9999;
+}
+
+#cursor {
+    width: 8px;
+    height: 8px;
+    background-color: var(--primary);
+    border-radius: 50%;
+    transform: translate(-50%, -50%); /* Center the dot on the cursor tip */
+}
+
+#cursor-border {
+    width: 40px;
+    height: 40px;
+    border: 2px solid var(--primary);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.15s ease-out;
+}
+
+/* Styles for when hovering over interactive elements */
+#cursor.grow, #cursor-border.grow {
+    transform: scale(2.5) translate(-20%, -20%);
+}
+
+#cursor-border.grow {
+    border-color: var(--secondary);
+    transform: scale(1.5) translate(-33%, -33%);
+}
         }
 
         * {
@@ -894,6 +930,15 @@
             .contact-content {
                 grid-template-columns: 1fr;
             }
+
+            /* Add inside the @media (max-width: 768px) block */
+#cursor, #cursor-border {
+    display: none;
+}
+
+* {
+    cursor: auto; /* Restore default cursor on mobile */
+}
         }
 
         @media (max-width: 768px) {
@@ -1079,6 +1124,9 @@
             </div>
         </div>
     </section>
+
+    <div id="cursor"></div>
+    <div id="cursor-border"></div>
 
     <!-- Experience Section -->
     <section id="experience" class="experience">
@@ -1306,7 +1354,7 @@
                             <span class="icon"><i class="fas fa-envelope"></i></span>
                             <div class="contact-text">
                                 <h4>Email</h4>
-                                <p>goutham6.techie@gmail.com</p>
+                                <p>6.techie@gmail.com</p>
                             </div>
                         </div>
                         <div class="contact-item">
@@ -1320,7 +1368,7 @@
                             <span class="icon"><i class="fab fa-linkedin"></i></span>
                             <div class="contact-text">
                                 <h4>LinkedIn</h4>
-                                <p>linkedin.com/in/goutham6699</p>
+                                <p>linkedin.com/in/6699</p>
                             </div>
                         </div>
                     </div>
@@ -1395,7 +1443,7 @@
         <div class="container">
             <div class="footer-content">
                 <div>
-                    <div class="footer-logo">Goutham.<span>dev</span></div>
+                    <div class="footer-logo">>.gs\<span>dev</span></div>
                     <p class="footer-text">
                         Full-stack developer specializing in building exceptional digital experiences 
                         with cutting-edge technologies and innovative solutions.
@@ -1442,7 +1490,7 @@
             
             <div class="copyright">
                 <p>© 2025 Goutham Saravanan. All rights reserved.</p>
-                <p>Designed and built with passion</p>
+               
             </div>
         </div>
     </footer>
@@ -1486,6 +1534,43 @@
             // Update particles
             updateParticles();
         });
+
+
+        // --- Custom Cursor Logic ---
+const cursor = document.getElementById("cursor");
+const cursorBorder = document.getElementById("cursor-border");
+const cursorPos = { x: 0, y: 0 };
+const cursorBorderPos = { x: 0, y: 0 };
+
+document.addEventListener("mousemove", (e) => {
+    cursorPos.x = e.clientX;
+    cursorPos.y = e.clientY;
+    // Move the small dot directly
+    cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+});
+
+// Use a recursive loop to animate the border with a delay
+requestAnimationFrame(function loop() {
+    const easting = 8; // Adjust this value for a stronger/weaker trailing effect
+    cursorBorderPos.x += (cursorPos.x - cursorBorderPos.x) / easting;
+    cursorBorderPos.y += (cursorPos.y - cursorBorderPos.y) / easting;
+    
+    cursorBorder.style.transform = `translate(${cursorBorderPos.x}px, ${cursorBorderPos.y}px)`;
+    requestAnimationFrame(loop);
+});
+
+// Add the 'grow' class on hover to all links and buttons
+document.querySelectorAll("a, button").forEach((item) => {
+    item.addEventListener("mouseover", () => {
+        cursor.classList.add("grow");
+        cursorBorder.classList.add("grow");
+    });
+    item.addEventListener("mouseleave", () => {
+        cursor.classList.remove("grow");
+        cursorBorder.classList.remove("grow");
+    });
+});
+
         
         // Mobile Menu Toggle
         const menuToggle = document.getElementById('menuToggle');
