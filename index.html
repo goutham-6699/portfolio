@@ -68,53 +68,61 @@
             box-sizing: border-box;
         }
 
-        /* Custom Cursor */
-        .cursor {
+        .sleek-cursor-outer {
             position: fixed;
-            width: 20px;
-            height: 20px;
+            top: 0; left: 0;
+            width: 32px; height: 32px;
             border: 2px solid var(--accent);
             border-radius: 50%;
-            transform: translate(-50%, -50%);
             pointer-events: none;
             z-index: 9999;
-            transition: all 0.1s ease;
-            transition-property: width, height, border, background;
+            transform: translate(-50%, -50%);
+            transition: border-color 0.2s cubic-bezier(.25,1,.5,1), background 0.2s cubic-bezier(.25,1,.5,1), width 0.18s cubic-bezier(.25,1,.5,1), height 0.18s cubic-bezier(.25,1,.5,1), filter 0.2s cubic-bezier(.25,1,.5,1);
+            background: rgba(67, 97, 238, 0.07);
             mix-blend-mode: difference;
+            filter: blur(0.1px);
         }
-
-        .cursor-inner {
+        .sleek-cursor-inner {
             position: fixed;
-            width: 6px;
-            height: 6px;
+            top: 0; left: 0;
+            width: 8px; height: 8px;
             background: var(--accent);
             border-radius: 50%;
-            transform: translate(-50%, -50%);
             pointer-events: none;
             z-index: 9999;
-            transition: width 0.2s ease, height 0.2s ease;
+            transform: translate(-50%, -50%);
+            transition: background 0.2s cubic-bezier(.25,1,.5,1), width 0.14s, height 0.14s, filter 0.2s cubic-bezier(.25,1,.5,1);
+            filter: blur(0.3px);
         }
-
-        .cursor.hover {
-            width: 50px;
-            height: 50px;
-            border-width: 1px;
-            background: rgba(67, 97, 238, 0.2);
+        .sleek-cursor-outer.active, .sleek-cursor-inner.active {
+            filter: blur(2.5px);
         }
-
-        .cursor.text-hover {
-            width: 80px;
-            height: 80px;
-            background: rgba(67, 97, 238, 0.3);
-            border: 2px solid var(--accent);
-        }
-
-        .cursor.click {
+        .sleek-cursor-outer.click {
             width: 40px;
             height: 40px;
-            border: 2px solid var(--accent);
+            background: rgba(67, 97, 238, 0.2);
+            border-color: var(--accent-light);
         }
-
+        .sleek-cursor-outer.hover {
+            width: 48px;
+            height: 48px;
+            border-color: var(--accent-light);
+            background: rgba(67, 97, 238, 0.18);
+            filter: blur(1.5px);
+        }
+        .sleek-cursor-inner.hover {
+            background: var(--accent-light);
+            width: 12px;
+            height: 12px;
+        }
+        @media (max-width: 768px) {
+            .sleek-cursor-outer, .sleek-cursor-inner {
+                display: none !important;
+            }
+            body {
+                cursor: auto;
+            }
+        }
         /* Sand Animation */
         .sand-animation {
             position: absolute;
@@ -818,6 +826,24 @@
     
     <!-- Header -->
     <header>
+        <div class="sleek-cursor-outer"></div>
+    <div class="sleek-cursor-inner"></div>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo">>.gs\<span>dev</span></a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#tech">Tech</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="theme-toggle" id="themeToggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
         <div class="container header-container">
             <a href="#" class="logo">>.gs\<span>dev</span></a>
             <ul class="nav-links">
@@ -1140,13 +1166,79 @@
 
     <script>
         // Custom Cursor
-        const cursor = document.querySelector('.cursor');
-        const cursorInner = document.querySelector('.cursor-inner');
-        
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
-            cursorInner.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
+        const cursorOuter = document.querySelector('.sleek-cursor-outer');
+        const cursorInner = document.querySelector('.sleek-cursor-inner');
+        let mouseX = 0, mouseY = 0, innerX = 0, innerY = 0, outerX = 0, outerY = 0;
+        const lerp = (a, b, n) => a + (b - a) * n;
+
+        // Smooth follow animation
+        function animateCursor() {
+            outerX = lerp(outerX, mouseX, 0.17);
+            outerY = lerp(outerY, mouseY, 0.17);
+            innerX = lerp(innerX, mouseX, 0.32);
+            innerY = lerp(innerY, mouseY, 0.32);
+            cursorOuter.style.transform = `translate(${outerX - 16}px, ${outerY - 16}px)`;
+            cursorInner.style.transform = `translate(${innerX - 4}px, ${innerY - 4}px)`;
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+
+        // Mousemove event
+        document.addEventListener('mousemove', e => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
         });
+
+        // Cursor interaction states
+        function setCursorHover(state) {
+            if (state) {
+                cursorOuter.classList.add('hover');
+                cursorInner.classList.add('hover');
+            } else {
+                cursorOuter.classList.remove('hover');
+                cursorInner.classList.remove('hover');
+            }
+        }
+        function setCursorClick(state) {
+            if (state) {
+                cursorOuter.classList.add('click');
+                cursorInner.classList.add('active');
+            } else {
+                cursorOuter.classList.remove('click');
+                cursorInner.classList.remove('active');
+            }
+        }
+
+        // Hover effect for interactive elements
+        const hoverSelectors = 'a, button, .btn, .nav-links a, input, textarea, select, .project-card, .tech-item, .theme-toggle, .social-links a';
+        document.querySelectorAll(hoverSelectors).forEach(el => {
+            el.addEventListener('mouseenter', () => setCursorHover(true));
+            el.addEventListener('mouseleave', () => setCursorHover(false));
+        });
+
+        // Click effect
+        document.addEventListener('mousedown', () => setCursorClick(true));
+        document.addEventListener('mouseup', () => setCursorClick(false));
+
+        // Hide cursor when out of window
+        document.addEventListener('mouseleave', () => {
+            cursorOuter.style.opacity = "0";
+            cursorInner.style.opacity = "0";
+        });
+        document.addEventListener('mouseenter', () => {
+            cursorOuter.style.opacity = "1";
+            cursorInner.style.opacity = "1";
+        });
+
+        // Optional: Hide on touch devices
+        function detectTouchDevice() {
+            return (('ontouchstart' in window) || (navigator.maxTouchPoints > 0));
+        }
+        if (detectTouchDevice()) {
+            cursorOuter.style.display = "none";
+            cursorInner.style.display = "none";
+            document.body.style.cursor = "auto";
+        }
         
         // Hover effects for cursor
         const hoverElements = document.querySelectorAll('a, button, .btn, .tech-item, .project-card, .skill-card');
