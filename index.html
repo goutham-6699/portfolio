@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Goutham Saravanan</title>
@@ -67,26 +66,7 @@
             color: var(--text-primary);
             transition: var(--transition);
             line-height: 1.6;
-            margin: 0;
-  height: 100vh;
-  cursor: none; /* hide default cursor */
-  background-color: #111;
         }
-
-
-.cursor {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 20px;
-  height: 20px;
-  border: 2px solid #fff;
-  border-radius: 50%;
-  pointer-events: none;
-  transform: translate(-50%, -50%);
-  transition: background 0.2s ease;
-  z-index: 9999;
-}
 
         h1, h2, h3, h4 {
             font-family: 'Space Grotesk', sans-serif;
@@ -1170,28 +1150,6 @@
                 }
             });
         });
-
-        const cursor = document.querySelector(".cursor");
-
-let mouseX = 0, mouseY = 0;
-let currentX = 0, currentY = 0;
-
-document.addEventListener("mousemove", e => {
-  mouseX = e.clientX;
-  mouseY = e.clientY;
-});
-
-function animate() {
-  // Smooth movement (easing)
-  currentX += (mouseX - currentX) * 0.15;
-  currentY += (mouseY - currentY) * 0.15;
-
-  cursor.style.transform = `translate(${currentX}px, ${currentY}px)`;
-
-  requestAnimationFrame(animate);
-}
-
-animate();
         
         // Form submission
         const contactForm = document.getElementById('contactForm');
