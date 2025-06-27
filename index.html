@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-            <link rel="icon" href="favicon.png" type="image/x-icon">
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Goutham|Portfolio</title>
@@ -472,7 +470,7 @@
             font-weight: 500;
         }
 
-        /* Image Modal */
+        /* Transparent Image Modal */
         .modal {
             display: none;
             position: fixed;
@@ -480,12 +478,17 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0,0,0,0.9);
             z-index: 2000;
             justify-content: center;
             align-items: center;
             opacity: 0;
             transition: opacity 0.3s ease;
+            backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .dark-mode .modal {
+            background-color: rgba(0, 0, 0, 0.1);
         }
 
         .modal.active {
@@ -494,72 +497,60 @@
         }
 
         .modal-content {
-            width: 90%;
-            max-width: 1200px;
+            max-width: 90%;
             max-height: 90vh;
             position: relative;
-            background: var(--bg-primary);
+            background: transparent;
             border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 0 40px rgba(0,0,0,0.5);
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px;
-            background: var(--accent);
-            color: white;
-        }
-
-        .modal-title {
-            font-size: 1.5rem;
-            font-weight: 600;
-            font-family: 'Space Grotesk', sans-serif;
         }
 
         .close-modal {
-            color: white;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: var(--text-primary);
             font-size: 30px;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s ease;
+            z-index: 2001;
             width: 40px;
             height: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
             border-radius: 50%;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(5px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .dark-mode .close-modal {
+            background: rgba(30, 30, 30, 0.8);
+            color: var(--text-primary-dark);
         }
 
         .close-modal:hover {
-            background: rgba(255,255,255,0.2);
             transform: rotate(90deg);
-        }
-
-        .modal-body {
-            padding: 30px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            color: var(--accent);
         }
 
         .main-image-container {
             width: 100%;
-            height: 400px;
-            margin-bottom: 20px;
-            border-radius: 10px;
+            max-height: 70vh;
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             position: relative;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
         }
 
         .main-image-container img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
             transition: transform 0.5s ease;
+            background: transparent;
         }
 
         .carousel-controls {
@@ -573,7 +564,7 @@
         }
 
         .carousel-btn {
-            background: rgba(255,255,255,0.8);
+            background: rgba(255, 255, 255, 0.8);
             color: var(--text-primary);
             border: none;
             width: 50px;
@@ -585,6 +576,13 @@
             align-items: center;
             justify-content: center;
             transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .dark-mode .carousel-btn {
+            background: rgba(30, 30, 30, 0.8);
+            color: var(--text-primary-dark);
         }
 
         .carousel-btn:hover {
@@ -599,6 +597,17 @@
             justify-content: center;
             flex-wrap: wrap;
             margin-top: 20px;
+            padding: 15px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            max-width: 90%;
+            margin: 20px auto 0;
+        }
+
+        .dark-mode .thumbnail-container {
+            background: rgba(30, 30, 30, 0.8);
         }
 
         .thumbnail {
@@ -1211,6 +1220,8 @@
                         </div>
                     </div>
                 </div>
+
+                        
                 
                 <!-- Travel Planner -->
                 <div class="project-card" data-title="Travel Planner" 
@@ -1230,98 +1241,6 @@
                             <span class="project-tag">Vue.js</span>
                             <span class="project-tag">Google Maps API</span>
                             <span class="project-tag">Responsive</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Video Streaming Platform -->
-                <div class="project-card" data-title="Video Streaming Platform" 
-                     data-images='[
-                         "https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                         "https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                         "https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                         "https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                     ]'>
-                    <div class="project-img">
-                        <img src="https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Video Streaming Platform">
-                    </div>
-                    <div class="project-info">
-                        <h3>Video Streaming Platform</h3>
-                        <p>Netflix-inspired streaming service with content categorization, user profiles, and recommendations.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">React</span>
-                            <span class="project-tag">Redux</span>
-                            <span class="project-tag">Video.js</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Fitness Tracker -->
-                <div class="project-card" data-title="Fitness Tracker" 
-                     data-images='[
-                         "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                         "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                         "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                         "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                     ]'>
-                    <div class="project-img">
-                        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Fitness Tracker">
-                    </div>
-                    <div class="project-info">
-                        <h3>Fitness Tracker</h3>
-                        <p>Comprehensive fitness application with workout tracking, nutrition logging, and progress visualization.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">React Native</span>
-                            <span class="project-tag">Firebase</span>
-                            <span class="project-tag">Chart.js</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Real Estate Platform -->
-                <div class="project-card" data-title="Real Estate Platform" 
-                     data-images='[
-                         "https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                         "https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                         "https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                         "https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                     ]'>
-                    <div class="project-img">
-                        <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Real Estate Platform">
-                    </div>
-                    <div class="project-info">
-                        <h3>Real Estate Platform</h3>
-                        <p>Property listing platform with advanced search filters, virtual tours, and agent matching.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">Vue.js</span>
-                            <span class="project-tag">Google Maps</span>
-                            <span class="project-tag">UI/UX</span>
-                        </div>
-                    </div>
-                </div>
-                
-
-                
-                
-                
-                <!-- Food Delivery App -->
-                <div class="project-card" data-title="Food Delivery App" 
-                     data-images='[
-                         "https://images.unsplash.com/photo-1552566626-52f8b828add9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                         "https://images.unsplash.com/photo-1552566626-52f8b828add9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                         "https://images.unsplash.com/photo-1552566626-52f8b828add9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                         "https://images.unsplash.com/photo-1552566626-52f8b828add9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                     ]'>
-                    <div class="project-img">
-                        <img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Food Delivery App">
-                    </div>
-                    <div class="project-info">
-                        <h3>Food Delivery App</h3>
-                        <p>Mobile application for ordering food from local restaurants with real-time tracking.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">React Native</span>
-                            <span class="project-tag">Firebase</span>
-                            <span class="project-tag">Maps</span>
                         </div>
                     </div>
                 </div>
@@ -1409,7 +1328,7 @@
     <footer>
         <div class="container">
             <div class="footer-container">
-                <div class="footer-logo">>Goutham<span> </span><span class="purple">Saravanan</span></div>
+                <div class="footer-logo">Goutham<span> </span><span class="purple">Saravanan</span></div>
             </div>
             <div class="copyright">
                 <p>© 2025 Goutham. All rights reserved.</p>
@@ -1420,20 +1339,15 @@
     <!-- Image Modal -->
     <div class="modal" id="imageModal">
         <div class="modal-content">
-            <div class="modal-header">
-                <div class="modal-title" id="modalProjectTitle">Project Title</div>
-                <span class="close-modal" id="closeModal">&times;</span>
-            </div>
-            <div class="modal-body">
-                <div class="main-image-container">
-                    <img id="mainImage" alt="Project Image">
-                    <div class="carousel-controls">
-                        <button class="carousel-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
-                        <button class="carousel-btn next-btn"><i class="fas fa-chevron-right"></i></button>
-                    </div>
+            <span class="close-modal" id="closeModal">&times;</span>
+            <div class="main-image-container">
+                <img id="mainImage" alt="Project Image">
+                <div class="carousel-controls">
+                    <button class="carousel-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
+                    <button class="carousel-btn next-btn"><i class="fas fa-chevron-right"></i></button>
                 </div>
-                <div class="thumbnail-container" id="thumbnailContainer"></div>
             </div>
+            <div class="thumbnail-container" id="thumbnailContainer"></div>
         </div>
     </div>
 
@@ -1534,7 +1448,6 @@
         // Project Image Modal
         const modal = document.getElementById('imageModal');
         const mainImage = document.getElementById('mainImage');
-        const modalTitle = document.getElementById('modalProjectTitle');
         const thumbnailContainer = document.getElementById('thumbnailContainer');
         const closeModalBtn = document.getElementById('closeModal');
         const prevBtn = document.querySelector('.prev-btn');
@@ -1546,7 +1459,6 @@
         // Open modal when project card is clicked
         document.querySelectorAll('.project-card').forEach(card => {
             card.addEventListener('click', function() {
-                const title = this.getAttribute('data-title');
                 const images = JSON.parse(this.getAttribute('data-images'));
                 
                 if (images && images.length > 0) {
@@ -1554,7 +1466,6 @@
                     currentIndex = 0;
                     
                     // Update modal content
-                    modalTitle.textContent = title;
                     mainImage.src = currentProjectImages[currentIndex];
                     
                     // Create thumbnails
