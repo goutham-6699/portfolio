@@ -35,7 +35,7 @@
             --border-dark: #333333;
             --card-bg-dark: #1e1e1e;
             --shadow-dark: rgba(0, 0, 0, 0.2);
-            --shadow-hover-dark: rgba(0, 0, 0, 0.3);
+            --shadow--dark: rgba(0, 0, 0, 0.3);
             
             /* Common */
             --transition: all 0.3s ease;
@@ -54,7 +54,7 @@
             --border: var(--border-dark);
             --card-bg: var(--card-bg-dark);
             --shadow: var(--shadow-dark);
-            --shadow-hover: var(--shadow-hover-dark);
+            --shadow-: var(--shadow--dark);
         }
 
         * {
@@ -206,18 +206,11 @@
         }
 
         .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--accent);
-            transition: var(--transition);
+            display: none;
         }
 
         .nav-links a:hover::after {
-            width: 100%;
+            
         }
 
         .theme-toggle {
